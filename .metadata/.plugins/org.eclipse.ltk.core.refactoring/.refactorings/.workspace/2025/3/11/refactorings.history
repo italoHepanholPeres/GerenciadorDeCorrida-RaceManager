@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;OrganizadorDeCorrida&apos; to &apos;RaceManager&apos;" description="Rename resource &apos;OrganizadorDeCorrida&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/OrganizadorDeCorrida" name="RaceManager" stamp="1741538724119" updateReferences="true"/>
+</session>

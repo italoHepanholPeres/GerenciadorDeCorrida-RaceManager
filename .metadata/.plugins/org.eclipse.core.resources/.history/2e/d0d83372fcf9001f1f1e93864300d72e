@@ -1,0 +1,124 @@
+package model;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class Corredor {
+
+	private int id;
+	private String nome;
+	private LocalDate dataNascimento;
+	private String genero;
+	private String telefone;
+	private Long tempoInicio;
+	private Long tempoFim;
+	private boolean participa;
+
+	private static final DateTimeFormatter FORMATODATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+	public Corredor() {
+	}
+
+	
+	
+	public Corredor(int id, String nome, String dataNascimento, String genero, String telefone, boolean participa) {
+		this.id = id;
+		this.nome = nome;
+		this.dataNascimento = LocalDate.parse(dataNascimento, FORMATODATA);
+		this.genero = genero;
+		this.telefone = telefone;
+		this.participa = participa;
+	}
+
+
+
+	public Corredor(int id, String nome, String dataNascimento, String genero, String telefone, Long tempoInicio,
+			Long tempoFim, boolean participa) {
+		
+		this.id = id;
+		this.nome = nome;
+		this.dataNascimento = LocalDate.parse(dataNascimento, FORMATODATA);
+		this.genero = genero;
+		this.telefone = telefone;
+		this.tempoInicio = tempoInicio;
+		this.tempoFim = tempoFim;
+		this.participa = participa;
+	}
+
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDataNascimento() {
+		return dataNascimento.format(FORMATODATA);
+	}
+
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = LocalDate.parse(dataNascimento, FORMATODATA);
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public boolean isParticipa() {
+		return participa;
+	}
+
+	public void setParticipa(boolean participa) {
+		this.participa = participa;
+	}
+
+	public static DateTimeFormatter getFormatodata() {
+		return FORMATODATA;
+	}
+
+	public Long getTempoInicio() {
+		return tempoInicio;
+	}
+
+	public void setTempoInicio(Long tempoInicio) {
+		this.tempoInicio = tempoInicio;
+	}
+
+	public Long getTempoFim() {
+		return tempoFim;
+	}
+
+	public void setTempoFim(Long tempoFim) {
+		this.tempoFim = tempoFim;
+	}
+
+	public void iniciarCorrida() {
+		
+		this.tempoInicio = System.currentTimeMillis();
+		
+	}
+	
+}

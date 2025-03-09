@@ -1,0 +1,26 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+
+import javax.swing.JFrame;
+
+import model.Race;
+
+public class ConfirmRace extends JFrame{
+	
+	private static final long serialVersionUID = 1L;
+
+	public ConfirmRace(Race race) {
+		this.setTitle("Confirmar Corrida");
+		this.setSize(600, 400);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
+
+		Container c = this.getContentPane();
+		c.setLayout(new BorderLayout());
+		
+		this.setVisible(true);
+	}
+	
+}

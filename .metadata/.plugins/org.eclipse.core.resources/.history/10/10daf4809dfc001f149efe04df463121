@@ -1,0 +1,63 @@
+package util;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class RunnersListPanel extends JPanel{
+	 	private JTable table;
+	    private DefaultTableModel model;
+
+	    public public RunnersListPanel() {
+	        setLayout(new BorderLayout());
+	        
+	        // Cria o modelo da tabela com as colunas desejadas
+	        model = new DefaultTableModel(new Object[] { "ID", "Nome", "Data de Nascimento", "Gênero", "Telefone" }, 0) {
+	            private static final long serialVersionUID = 1L;
+	            
+	            @Override
+	            public boolean isCellEditable(int row, int column) {
+	                // Impede que o usuário edite as células diretamente
+	                return false;
+	            }
+	        };
+
+	        // Cria a tabela e desabilita a reordenação ou redimensionamento das colunas
+	        table = new JTable(model);
+	        table.getTableHeader().setReorderingAllowed(false);
+	        table.getTableHeader().setResizingAllowed(false);
+
+	        JScrollPane scrollPane = new JScrollPane(table);
+	        add(scrollPane, BorderLayout.CENTER);
+	    }
+
+	    // Método para adicionar uma nova linha à tabela
+	    public void addRunner(int id, String nome, String dataNascimento, String genero, String telefone) {
+	        model.addRow(new Object[] { id, nome, dataNascimento, genero, telefone });
+	    }
+
+	    // Método para remover uma linha da tabela com base no ID
+	    public void removeRunner(int id) {
+	        int rowIndex = -1;
+	        for (int i = 0; i < model.getRowCount(); i++) {
+	            if ((int) model.getValueAt(i, 0) == id) {
+	                rowIndex = i;
+	                break;
+	            }
+	        }
+	        if (rowIndex != -1) {
+	            model.removeRow(rowIndex);
+	        } else {
+	            JOptionPane.showMessageDialog(this, "ID não encontrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+	        }
+	    }
+
+	    // Caso precise expor o modelo para outras operações
+	    public DefaultTableModel getModel() {
+	        return model;
+	    }
+}

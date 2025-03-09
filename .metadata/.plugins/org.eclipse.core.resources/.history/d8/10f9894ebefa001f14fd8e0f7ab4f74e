@@ -1,0 +1,45 @@
+package view;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Menu extends JFrame {
+
+    public Menu() {
+        setTitle("Menu Principal");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        
+        // Painel principal
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(2, 1, 10, 10));
+
+        // Botões
+        JButton btnCadastro = new JButton("Cadastro de Corredores");
+        JButton btnCorrida = new JButton("Iniciar Corrida");
+
+        // Ações dos botões
+        btnCadastro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+
+        btnCorrida.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+
+        // Adiciona botões ao painel
+        panel.add(btnCadastro);
+        panel.add(btnCorrida);
+
+        // Adiciona painel ao frame
+        add(panel);
+        
+        setVisible(true);
+    }

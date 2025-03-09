@@ -1,0 +1,97 @@
+package model;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+
+public class Runner {
+
+	private int id;
+	private String name;
+	private LocalDate birthDate;
+	private String gender;
+	private String telefone;
+	private long tempoFim;
+
+	private static final DateTimeFormatter FORMATODATA = DateTimeFormatter.ofPattern("dd/MM/uuuu")
+			.withResolverStyle(ResolverStyle.STRICT);
+
+	public Runner() {
+	}
+
+	public Runner(int id, String name, String birthDate, String gender, String telefone) {
+		this.id = id;
+		this.name = name;
+		this.birthDate = LocalDate.parse(birthDate, FORMATODATA);
+		this.gender = gender;
+		this.telefone = telefone;
+		this.tempoFim = 0L;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getBirthDate() {
+		return birthDate.format(FORMATODATA);
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = LocalDate.parse(birthDate, FORMATODATA);
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	public static DateTimeFormatter getFormatodata() {
+		return FORMATODATA;
+	}
+
+	public long getTempoFim() {
+		return tempoFim;
+	}
+
+	public void setTempoFim(long tempoFim) {
+		this.tempoFim = tempoFim;
+	}
+
+	public void finalizarCorrida(long tempoAtual) {
+		this.tempoFim = tempoAtual;
+	}
+
+	public long getTempoDecorrido() {
+		return this.tempoFim - Race.getStartTime();
+	}
+
+	@Override
+	public String toString() {
+		return "Corredor [id=" + id + ", nome=" + name + ", dataNascimento=" + birthDate + ", genero=" + gender
+				+ ", telefone=" + telefone + ", tempoFim=" + tempoFim + "]";
+	}
+	
+	
+}

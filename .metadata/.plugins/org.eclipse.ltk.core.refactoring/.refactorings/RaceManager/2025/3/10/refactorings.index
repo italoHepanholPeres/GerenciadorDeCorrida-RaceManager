@@ -1,0 +1,15 @@
+1741185000952	Delete element
+1741185583249	Encapsulate field 'genero, ...'
+1741187778234	Move compilation unit
+1741204435031	Rename type 'GerenciadorCorredor'
+1741282120738	Move compilation unit
+1741282125029	Delete element
+1741282132770	Rename type 'GerenciadorCorredores'
+1741388639753	Delete element
+1741391661726	Delete element
+1741442942438	Rename compilation unit 'ValidateDate.java'
+1741444058039	Rename type 'CriarCorrida'
+1741445912956	Rename type 'CadastrarCorredor'
+1741446071478	Rename type 'Corredor'
+1741447184220	Rename type 'Corrida'
+1741460250964	Rename type 'RegisterRace'

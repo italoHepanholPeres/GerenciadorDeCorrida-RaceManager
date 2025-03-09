@@ -1,0 +1,14 @@
+package main;
+
+import view.CreateRace;
+
+public class build {
+	public static void main(String[] args) {
+		
+		CreateRace criarCorrida = new CreateRace();
+
+		criarCorrida.repaint();
+		criarCorrida.show();
+	
+	}
+}

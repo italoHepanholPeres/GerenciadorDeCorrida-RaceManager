@@ -1,0 +1,50 @@
+package view;
+
+import java.awt.Container;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Menu extends JFrame{
+	
+	public Menu() {
+		this.setTitle("RunMenu");
+		this.setSize(500,300);
+		this.setVisible(true);
+		this.setResizable(true);
+		
+		Container c = this.getContentPane();
+		
+		JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(2, 1, 10, 10));
+
+        // Botões
+        JButton btnCadastro = new JButton("Cadastro de Corredores");
+        JButton btnCorrida = new JButton("Iniciar Corrida");
+
+        // Ações dos botões
+        btnCadastro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+
+        btnCorrida.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+
+        // Adiciona botões ao painel
+        panel.add(btnCadastro);
+        panel.add(btnCorrida);
+
+        // Adiciona painel ao frame
+        add(panel);
+        
+        setVisible(true);
+    }
+}
+	
+

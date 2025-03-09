@@ -1,0 +1,106 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.format.DateTimeParseException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import model.Corrida;
+import util.DateValidator;
+
+public class CriarCorrida extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
+
+	public CreateRace() {
+		this.setTitle("Criar Corrida");
+		this.setSize(600, 400);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
+
+		Container c = this.getContentPane();
+		c.setLayout(new BorderLayout());
+
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(6, 2, 2, 2));
+		c.add(panel);
+
+		JLabel nome = new JLabel("Informe o nome da corrida:");
+		nome.setToolTipText("Nome da corrida");
+		JTextField nomeInput = new JTextField(30);
+		nomeInput.setSize(100,100);
+		panel.add(nome);
+		panel.add(nomeInput);
+
+		JLabel cidade = new JLabel("Informe a cidade que ocorrerá:");
+		cidade.setToolTipText("Cidade em que ocorrerá a corrida");
+		JTextField cidadeInput = new JTextField(30);
+		panel.add(cidade);
+		panel.add(cidadeInput);
+
+		JLabel localInicio = new JLabel("Informe o local de início da corrida:");
+		localInicio.setToolTipText("Local de início da corrida");
+		JTextField localIniInput = new JTextField(30);
+		panel.add(localInicio);
+		panel.add(localIniInput);
+
+		JLabel percurso = new JLabel("Informe o percurso total da corrida:");
+		percurso.setToolTipText("percurso da corrida");
+		JTextField percursoInput = new JTextField(30);
+		percursoInput.setText("Ex:12KM");
+		panel.add(percurso);
+		panel.add(percursoInput);
+		
+		JLabel data = new JLabel("Informe a data da corrida:");
+		data.setToolTipText("Data da corrida");
+		JTextField dataInput = new JTextField(30);
+		panel.add(data);
+		panel.add(dataInput);
+
+		JButton Btncriar = new JButton("Criar Corrida");
+		panel.add(Btncriar);
+
+		Btncriar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String nome = nomeInput.getText().trim();
+				String cidade = cidadeInput.getText().trim();
+				String localInicio = localIniInput.getText().trim();
+				String percurso = percursoInput.getText().trim();
+				String data = dataInput.getText().trim();
+				
+				if(nome.isEmpty() || cidade.isEmpty() || localInicio.isEmpty() || percurso.isEmpty() || data.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Um ou mais campos estão vazios");
+					return;
+				}
+				
+				if(DateValidator.validateDateToRace(data, Corrida.getFormato())) {
+					JOptionPane.showMessageDialog(null, "A data não pode ja ter passado");
+				}
+				
+				try {
+					Corrida corrida = new Corrida(nome,
+							cidade,
+							localInicio,
+							percurso,
+							data);
+					
+					new CadastrarCorredor(corrida);
+					
+				}catch(DateTimeParseException ex) {
+					JOptionPane.showMessageDialog(null, "A data tem estar no formato dd/MM/yyyy HH:mm e tem que ser uma data válida");
+				}
+			}
+		});
+	}
+}

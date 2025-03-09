@@ -1,0 +1,14 @@
+package main;
+
+import view.CriarCorrida;
+
+public class build {
+	public static void main(String[] args) {
+		
+		CriarCorrida criarCorrida = new CriarCorrida();
+
+		criarCorrida.repaint();
+		criarCorrida.show();
+	
+	}
+}

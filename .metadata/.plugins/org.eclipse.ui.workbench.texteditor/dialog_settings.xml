@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="true"/>
+		<list key="findhistory">
+			<item value="outputPanel"/>
+			<item value="outputPan"/>
+			<item value="idTor"/>
+			<item value="tempoFim"/>
+			<item value="race"/>
+			<item value="telefone"/>
+			<item value="gender"/>
+			<item value="genero"/>
+			<item value="dataNascimento"/>
+			<item value="name"/>
+			<item value="nome"/>
+			<item value="startTime"/>
+			<item value="tempoInicio"/>
+			<item value="data"/>
+			<item value="percurso"/>
+		</list>
+		<list key="replacehistory">
+			<item value="finishedTime"/>
+			<item value="phone"/>
+			<item value="gender"/>
+			<item value="birthDate"/>
+			<item value="name"/>
+			<item value="startTime"/>
+			<item value="date"/>
+			<item value="distance"/>
+			<item value="startLocal"/>
+			<item value="city"/>
+			<item value="nextId"/>
+			<item value="runnersFinished"/>
+			<item value="runnersFishef"/>
+			<item value="runnersRunning"/>
+			<item value="FORMAT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="646"/>
+		<item key="DIALOG_Y_ORIGIN" value="349"/>
+	</section>
+</section>

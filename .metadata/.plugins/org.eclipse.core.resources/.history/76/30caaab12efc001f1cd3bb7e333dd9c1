@@ -1,0 +1,130 @@
+package model;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Corrida {
+	private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm")
+			.withResolverStyle(ResolverStyle.STRICT);
+	private Map<Integer, Runner> runnersRunning = new HashMap<>();
+	private List<Runner> runnersFinished = new ArrayList<Runner>();
+	private int proximoId = 1;
+	
+	private String nome;
+	private String cidade;
+	private String localDeInicio;
+	private String percurso;
+	private LocalDateTime data;
+	private static long tempoInicio;
+	
+	public Corrida(String nome, String cidade, String localDeInicio, String percurso, String data) {
+		this.nome = nome;
+		this.cidade = cidade;
+		this.localDeInicio = localDeInicio;
+		this.percurso = percurso;
+		this.data = LocalDateTime.parse(data,FORMAT);
+		System.out.println(this.data);
+	}
+
+	
+	
+	public static DateTimeFormatter getFORMAT() {
+		return FORMAT;
+	}
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getLocalDeInicio() {
+		return localDeInicio;
+	}
+
+	public void setLocalDeInicio(String localDeInicio) {
+		this.localDeInicio = localDeInicio;
+	}
+
+	public String getPercurso() {
+		return percurso;
+	}
+
+	public void setPercurso(String percurso) {
+		this.percurso = percurso;
+	}
+	
+	public LocalDateTime getData() {
+		return data;
+	}
+
+	public void setData(LocalDateTime data) {
+		this.data = data;
+	}
+
+	public Runner adicionarCorredor(String nome, String dataNascimento, String genero, String telefone) {
+		Runner corredor = new Runner(proximoId, nome, dataNascimento, genero, telefone);
+		runnersRunning.put(proximoId, corredor);
+		proximoId++;
+		return corredor;
+	}
+
+	public Runner obterCorredor(int id) {
+		return runnersRunning.get(id);
+	}
+
+	public void removerCorredor(int id) {
+		runnersRunning.remove(id);
+	}
+
+	public List<Runner> listarCorredores() {
+		return new ArrayList<Runner>(runnersRunning.values());
+	}
+	
+	
+	public static Long getTempoInicio() {
+		return tempoInicio;
+	}
+
+	public static void iniciarCorrida() {
+		tempoInicio = System.currentTimeMillis() / 1000;
+	}
+	public void terminarCorrida() {
+	
+	}
+	
+	public void completarCorrida(int id) {
+		long tempoAtual = System.currentTimeMillis()/1000;
+		if(runnersRunning.get(id) != null) {
+			runnersRunning.get(id).finalizarCorrida(tempoAtual);
+			runnersFishef.add(runnersRunning.get(id));
+			runnersRunning.remove(id);
+			System.out.println("O corredor completou a corrida");
+		}else {
+			System.out.println("corredor nao existe");
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Corrida [corredoresCorrendo=" + runnersRunning + ", corredoresFinalizados=" + runnersFishef
+				+ ", proximoId=" + proximoId + ", nome=" + nome + ", cidade=" + cidade + ", localDeInicio="
+				+ localDeInicio + ", percurso=" + percurso + ", data=" + data + "]";
+	}
+
+	
+}

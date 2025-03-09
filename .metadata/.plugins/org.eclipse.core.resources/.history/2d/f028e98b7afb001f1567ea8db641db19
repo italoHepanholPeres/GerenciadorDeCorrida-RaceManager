@@ -1,0 +1,51 @@
+package view;
+
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Menu extends JFrame {
+
+	public Menu() {
+		this.setTitle("RunMenu");
+		this.setSize(720, 550);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
+		
+
+		Container c = this.getContentPane();
+
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(2, 1, 10, 10));
+		
+
+		JButton btnCadastro = new JButton("Criar Corrida");
+		btnCadastro.setSize(100,100);
+		JButton btnCorrida = new JButton("Iniciar Corrida");
+		btnCorrida.setSize(100,100);
+		
+		btnCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CriarCorrida();
+			}
+		});
+
+		btnCorrida.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+
+		panel.add(btnCadastro);
+		panel.add(btnCorrida);
+
+		c.add(panel);
+
+	}
+}

@@ -1,0 +1,14 @@
+package main;
+
+import model.Corrida;
+
+public class build {
+	public static void main(String[] args) {
+		
+		Menu menu = new Menu();
+
+		menu.repaint();
+		menu.show();
+	
+	}
+}

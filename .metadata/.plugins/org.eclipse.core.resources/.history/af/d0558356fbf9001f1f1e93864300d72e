@@ -1,0 +1,15 @@
+package main;
+
+import model.Corredor;
+import view.Menu;
+
+public class build {
+	public static void main(String[] args) {
+		
+		Menu menu = new Menu();
+
+		menu.repaint();
+		menu.show();
+	
+	}
+}

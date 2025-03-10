@@ -37,6 +37,26 @@ public class RunnersListPanel extends JPanel{
 	        add(scrollPane, BorderLayout.CENTER);
 	    }
 	    
+	    public RunnersListPanel(String field) {
+	        setLayout(new BorderLayout());
+	        
+	        model = new DefaultTableModel(new Object[] { "ID", "Nome", "Data de Nascimento", "Gênero", "Telefone", field }, 0) {
+	            private static final long serialVersionUID = 1L;
+	            //não deixa editar os campos
+	            @Override
+	            public boolean isCellEditable(int row, int column) {
+	                return false;
+	            }
+	        };
+	        //não deixa mexer na tabela
+	        table = new JTable(model);
+	        table.getTableHeader().setReorderingAllowed(false);
+	        table.getTableHeader().setResizingAllowed(false);
+
+	        JScrollPane scrollPane = new JScrollPane(table);
+	        add(scrollPane, BorderLayout.CENTER);
+	    }
+	    
 	    public RunnersListPanel(Race race) {
 	        setLayout(new BorderLayout());
 	        
@@ -62,6 +82,10 @@ public class RunnersListPanel extends JPanel{
 	    }
 
 	    public void addRunner(int id, String name, String birthDate, String gender, String phone) {
+	        model.addRow(new Object[]{ id, name, birthDate, gender, phone });
+	    }
+	    
+	    public void addRunner(int id, String name, String birthDate, String gender, String phone, long field) {
 	        model.addRow(new Object[]{ id, name, birthDate, gender, phone });
 	    }
 

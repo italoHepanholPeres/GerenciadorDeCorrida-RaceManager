@@ -1,11 +1,11 @@
 package main;
 
-import view.CreateRace;
+import view.CreateRaceScreen;
 
 public class build {
 	public static void main(String[] args) {
 		
-		CreateRace createRace = new CreateRace();
+		CreateRaceScreen createRace = new CreateRaceScreen();
 
 		createRace.repaint();
 		createRace.show();

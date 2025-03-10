@@ -82,7 +82,7 @@ public class Race {
 		return runner;
 	}
 
-	public Runner getRunner(int id) {
+	public Runner getRunnerRunning(int id) {
 		return runnersRunning.get(id);
 	}
 
@@ -94,12 +94,23 @@ public class Race {
 		return new ArrayList<Runner>(runnersRunning.values());
 	}
 	
+	public Runner getRunnerFinishedById(int id) {
+		
+		for(Runner runner : runnersFinished) {
+			if(runner.getId() == id) {
+				return runner;
+			}
+		}
+		
+		return null;
+	}
+	
 	public static Long getStartTime() {
 		return startTime;
 	}
 
 	public static void startRace() {
-		startTime = System.currentTimeMillis() / 1000;
+		startTime = System.currentTimeMillis()/1000;
 	}
 	public void finishRace() {
 	
@@ -111,7 +122,6 @@ public class Race {
 			runnersRunning.get(id).finishRace(tempoAtual);
 			runnersFinished.add(runnersRunning.get(id));
 			runnersRunning.remove(id);
-			System.out.println("O corredor completou a corrida");
 		}else {
 			System.out.println("corredor nao existe");
 		}

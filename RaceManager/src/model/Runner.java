@@ -76,7 +76,7 @@ public class Runner {
 	}
 
 	public void setFinishedTime(long finishedTime) {
-		this.finishedTime = finishedTime;
+		this.finishedTime = finishedTime/1000;
 	}
 
 	public void finishRace(long tempoAtual) {

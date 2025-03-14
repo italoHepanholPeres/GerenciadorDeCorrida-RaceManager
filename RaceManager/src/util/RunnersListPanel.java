@@ -28,8 +28,10 @@ public class RunnersListPanel extends JPanel{
 	                return false;
 	            }
 	        };
-	        //não deixa mexer na tabela
+	        
 	        table = new JTable(model);
+	        
+	      //não deixa mexer na tabela
 	        table.getTableHeader().setReorderingAllowed(false);
 	        table.getTableHeader().setResizingAllowed(false);
 

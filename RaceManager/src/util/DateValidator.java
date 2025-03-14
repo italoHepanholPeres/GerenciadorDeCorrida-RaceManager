@@ -1,16 +1,15 @@
 package util;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import javax.swing.JOptionPane;
-
 public class DateValidator {
 	public static boolean validateDateToRace(String date, DateTimeFormatter format) {
-		LocalDate now = LocalDate.now();
+		LocalDateTime now = LocalDateTime.now();
 		try {
-			LocalDate testDate = LocalDate.parse(date,format);
+			LocalDateTime testDate = LocalDateTime.parse(date,format);
 		
 			if(testDate.isBefore(now)) {
 				return false;

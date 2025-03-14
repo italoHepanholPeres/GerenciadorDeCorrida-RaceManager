@@ -8,11 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 public class Race {
 	private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm")
 			.withResolverStyle(ResolverStyle.STRICT);
 	private Map<Integer, Runner> runnersRunning = new HashMap<>();
-	private List<Runner> runnersFinished = new ArrayList<Runner>();
+	private Map<Integer,Runner> runnersFinished = new HashMap<>();
 	private int nextId = 1;
 	
 	private String name;
@@ -95,17 +97,10 @@ public class Race {
 	}
 	
 	public Runner getRunnerFinishedById(int id) {
-		
-		for(Runner runner : runnersFinished) {
-			if(runner.getId() == id) {
-				return runner;
-			}
-		}
-		
-		return null;
+		return runnersFinished.get(id);
 	}
 	
-	public static Long getStartTime() {
+	public static long getStartTime() {
 		return startTime;
 	}
 
@@ -116,15 +111,14 @@ public class Race {
 	
 	}
 	
-	public void completeRace(int id) {
+	public Runner completeRace(int id) {	
 		long tempoAtual = System.currentTimeMillis()/1000;
-		if(runnersRunning.get(id) != null) {
-			runnersRunning.get(id).finishRace(tempoAtual);
-			runnersFinished.add(runnersRunning.get(id));
-			runnersRunning.remove(id);
-		}else {
-			System.out.println("corredor nao existe");
-		}
+		Runner runner = new Runner(runnersRunning.get(id));
+		runner.finishRace(tempoAtual);
+		
+		runnersFinished.put(runner.getId(),runner);
+		runnersRunning.remove(runner.getId());
+		return runnersFinished.get(runner.getId());	
 	}
 
 	@Override

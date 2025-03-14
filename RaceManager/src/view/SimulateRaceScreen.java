@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import model.Race;
+import model.Runner;
 import util.RunnersListPanel;
 
 public class SimulateRaceScreen extends JFrame{
@@ -54,19 +55,20 @@ public class SimulateRaceScreen extends JFrame{
 				try {
 					int passedId = Integer.parseInt(idInput.getText().trim());
 					
-					race.completeRace(passedId);
-					int id = race.getRunnerFinishedById(passedId).getId();
-					String name = race.getRunnerFinishedById(id).getName();
-					String birthDate = race.getRunnerFinishedById(id).getBirthDate();
-					String gender = race.getRunnerFinishedById(id).getGender();
-					String phone = race.getRunnerFinishedById(id).getPhone();
+					Runner runner = race.completeRace(passedId);
 					
-					list.addRunner(id, name, birthDate, gender, phone,race.getRunnerFinishedById(id).getElapsedTime());
+					list.addRunner(runner.getId(),
+							runner.getName(),
+							runner.getBirthDate(),
+							runner.getGender(),
+							runner.getPhone(),
+							runner.getElapsedTime()
+							);
 					
 				} catch (NumberFormatException e2) {
 					JOptionPane.showMessageDialog(null, "Impossível converter para número", "Erro", JOptionPane.ERROR_MESSAGE);
 				}catch (NullPointerException e3) {
-					JOptionPane.showMessageDialog(null, "Corredor inexistente", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Corredor inexistente ou já terminou a corrida", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

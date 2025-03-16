@@ -1,14 +1,14 @@
 package main;
 
-import view.CreateRaceScreen;
+import view.InitialMenuScreen;
 
 public class build {
 	public static void main(String[] args) {
 		
-		CreateRaceScreen createRace = new CreateRaceScreen();
+		InitialMenuScreen menu = new InitialMenuScreen();
 
-		createRace.repaint();
-		createRace.show();
+		menu.repaint();
+		menu.show();
 	
 	}
 }

@@ -2,7 +2,9 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeParseException;
@@ -20,12 +22,20 @@ import util.DateValidator;
 public class CreateRaceScreen extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	private int screenHeight;
+	private int screenWidth;
+	
 	public CreateRaceScreen() {
 		this.setTitle("Criar Corrida");
-		this.setSize(600, 400);
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension d = tk.getScreenSize();
+		screenHeight = d.height;
+		screenWidth = d.width;
+		this.setSize(screenWidth-400, screenHeight-500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 
 		Container c = this.getContentPane();
 		c.setLayout(new BorderLayout());
@@ -100,7 +110,7 @@ public class CreateRaceScreen extends JFrame {
 							distance,
 							date);
 					dispose();
-					new RegisterRunnerScreen(race);
+					new InitialMenuScreen(race);
 				}
 		});
 		

@@ -138,7 +138,7 @@ public class RegisterRunnerScreen extends JFrame {
 		confirmBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new ConfirmRaceScreen(race);
+				new InitialMenuScreen(race);
 			}
 		});
 		

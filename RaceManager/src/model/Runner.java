@@ -19,14 +19,6 @@ public class Runner {
 	public Runner() {
 	}
 	
-	public Runner(Runner runner) {
-		this.id = runner.getId();
-		this.name = runner.getName();
-		this.birthDate = LocalDate.parse(runner.getBirthDate(), FORMAT);
-		this.gender = runner.getGender();
-		this.phone = runner.getPhone();
-	}
-
 	public Runner(int id, String name, String birthDate, String gender, String phone) {
 		this.id = id;
 		this.name = name;
@@ -82,16 +74,18 @@ public class Runner {
 		return finishedTime;
 	}
 
-	public void setFinishedTime(long finishedTime) {
-		this.finishedTime = finishedTime/1000;
-	}
-
 	public void finishRace(long tempoAtual) {
 		this.finishedTime = tempoAtual;
 	}
 
-	public long getElapsedTime() {
-		return this.finishedTime - Race.getStartTime();
+	public String getElapsedTime() {
+	    long elapsedMillis = this.finishedTime - Race.getStartTime();
+
+	    long minutes = (elapsedMillis / 60000) % 60;
+	    long seconds = (elapsedMillis / 1000) % 60;
+	    long milliseconds = elapsedMillis % 1000;
+
+	    return String.format("%02d:%02d:%03d", minutes, seconds, milliseconds);
 	}
 
 	@Override

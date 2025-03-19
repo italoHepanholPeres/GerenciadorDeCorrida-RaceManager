@@ -1,6 +1,6 @@
 package main;
 
-import view.InitialMenuScreen;
+import view.screen.InitialMenuScreen;
 
 public class build {
 	public static void main(String[] args) {

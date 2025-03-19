@@ -1,4 +1,4 @@
-package util;
+package view.panel;
 
 import java.awt.BorderLayout;
 
@@ -87,8 +87,8 @@ public class RunnersListPanel extends JPanel{
 	        model.addRow(new Object[]{ id, name, birthDate, gender, phone });
 	    }
 	    
-	    public void addRunner(int id, String name, String birthDate, String gender, String phone, long field) {
-	        model.addRow(new Object[]{ id, name, birthDate, gender, phone });
+	    public void addRunner(int id, String name, String birthDate, String gender, String phone, String field) {
+	        model.addRow(new Object[]{ id, name, birthDate, gender, phone, field});
 	    }
 
 	    public void removeRunner(int id) {
@@ -102,7 +102,9 @@ public class RunnersListPanel extends JPanel{
 	        if (rowIndex != -1) {
 	            model.removeRow(rowIndex);
 	        } else {
-	            JOptionPane.showMessageDialog(this, "ID não encontrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+	        	JOptionPane.showMessageDialog(this, "ID não encontrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+	        	this.revalidate();
+	        	this.repaint();
 	        }
 	    }
 

@@ -1,9 +1,8 @@
-package view;
+package view.screen;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -20,63 +19,20 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import model.Race;
-import util.RunnersListPanel;
+import view.panel.RegisterRunnerPanel;
 
-public class InitialMenuScreen extends JFrame{
+public class ConfirmScreen extends JFrame{
 	
-	private static final long serialVersionUID = 1L;
-	
-	private Image wallpaper;
 	private int screenHeight;
 	private int screenWidth;
 	
-	public InitialMenuScreen() {
-		this.setTitle("Menu");
+	public ConfirmScreen(final Race race) {
+		this.setTitle("Registrar corredor");
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension d = tk.getScreenSize();
 		screenHeight = d.height;
 		screenWidth = d.width;
-		this.setSize(screenWidth, screenHeight);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
-		
-		wallpaper = tk.createImage("src/resource/wallpaper.png");
-		JPanel backPanel = new NewContentPanel();
-
-		Container c = this.getContentPane();
-		c.setLayout(new BorderLayout());
-		c.add(backPanel,BorderLayout.CENTER);
-		
-		JMenuBar menuBar = new JMenuBar();
-		this.setJMenuBar(menuBar);
-		
-		JMenu register = new JMenu("Criação");
-		
-		menuBar.add(register);
-		
-		ImageIcon originalIcon1 = new ImageIcon("src/resource/createRace.jpg");
-		Image imageIcon1 = originalIcon1.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-		
-		
-		JMenuItem createRace = new JMenuItem("Criar corrida", new ImageIcon(imageIcon1));
-		register.add(createRace);
-		
-		createRace.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new CreateRaceScreen();
-			}
-		});
-			
-		this.setVisible(true);
-	}
-	
-	public InitialMenuScreen(final Race race) {
-		this.setTitle("Menu");
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension d = tk.getScreenSize();
-		screenHeight = d.height;
-		screenWidth = d.width;
-		this.setSize(screenWidth, screenHeight);
+		this.setSize(screenWidth-100, screenHeight-200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 
@@ -98,7 +54,7 @@ public class InitialMenuScreen extends JFrame{
 		
 		JPanel racePanel = new JPanel();
 		racePanel.setPreferredSize(new Dimension(screenWidth,200));
-		racePanel.setLayout(new GridLayout(5,2,1,1));
+		racePanel.setLayout(new GridLayout(6,2,1,1));
 		
 		JLabel name = new JLabel("Nome da corrida:");
 		JLabel nameOutput = new JLabel(race.getName());
@@ -125,11 +81,16 @@ public class InitialMenuScreen extends JFrame{
 		racePanel.add(date);
 		racePanel.add(dateOutput);
 		
-		RunnersListPanel runnerList = new RunnersListPanel(race);
+		JLabel timeLimit = new JLabel("Tempo limite da corrida:");
+		JLabel timeLimitOutput = new JLabel(race.getLimitRaceTimeToString());
+		racePanel.add(timeLimit);
+		racePanel.add(timeLimitOutput);
+		
+		RegisterRunnerPanel runnerPanel = new RegisterRunnerPanel(race);
 		JPanel bttnPanel = new JPanel();
-		bttnPanel.setPreferredSize(new Dimension(screenWidth,100));
+		bttnPanel.setPreferredSize(new Dimension(screenWidth,50));
 		bttnPanel.setLayout(new GridLayout(1,2,2,2));
-		runnerList.add(bttnPanel, BorderLayout.SOUTH);
+		runnerPanel.add(bttnPanel, BorderLayout.SOUTH);
 		
 		JButton backBttn = new JButton("Apagar corrida");
 		bttnPanel.add(backBttn, BorderLayout.SOUTH);
@@ -143,15 +104,7 @@ public class InitialMenuScreen extends JFrame{
 		});
 		
 		c.add(racePanel, BorderLayout.NORTH);
-		c.add(runnerList, BorderLayout.CENTER);
+		c.add(runnerPanel, BorderLayout.CENTER);
 		this.setVisible(true);
 	}
-	
-	private class NewContentPanel extends JPanel{
-		protected void paintComponent(final Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(wallpaper, 0, 0, screenWidth,screenWidth,this);
-		}
-	}
-	
 }

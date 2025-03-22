@@ -46,36 +46,41 @@ public class CreateRaceScreen extends JFrame {
 		JLabel name = new JLabel("Informe o nome da corrida:");
 		name.setToolTipText("Nome da corrida");
 		JTextField nameInput = new JTextField(30);
+		nameInput.setToolTipText("EX:Rodrigo..");
 		panel.add(name);
 		panel.add(nameInput);
 
 		JLabel city = new JLabel("Informe a cidade que ocorrerá:");
 		city.setToolTipText("Cidade em que ocorrerá a corrida");
 		JTextField cityInput = new JTextField(30);
+		cityInput.setToolTipText("EX:São Fidélis..");
 		panel.add(city);
 		panel.add(cityInput);
 
 		JLabel startLocal = new JLabel("Informe o local de início da corrida:");
 		startLocal.setToolTipText("Local de início da corrida");
 		JTextField startLocalInput = new JTextField(30);
+		startLocalInput.setToolTipText("EX:Praça..");
 		panel.add(startLocal);
 		panel.add(startLocalInput);
 
 		JLabel distance = new JLabel("Informe a distância total da corrida:");
 		distance.setToolTipText("distância da corrida");
 		JTextField distanceInput = new JTextField(30);
-		distanceInput.setText("Ex:12KM");
+		distanceInput.setToolTipText("EX:5KM..");
 		panel.add(distance);
 		panel.add(distanceInput);
 		
-		JLabel date = new JLabel("Informe a data da corrida:");
+		JLabel date = new JLabel("Informe a data e hora da corrida:");
 		date.setToolTipText("Data da corrida");
 		JTextField dateInput = new JTextField(30);
+		dateInput.setToolTipText("EX:12/12/2025 12:00");
 		panel.add(date);
 		panel.add(dateInput);
 		
-		JLabel limitTime = new JLabel("Informe o tempo limite para completar a corrida no formato HH:MM:");
+		JLabel limitTime = new JLabel("Informe o tempo limite para completar a corrida:");
 		JTextField limitTimeInput = new JTextField(30);
+		limitTimeInput.setToolTipText("EX:02:00(duas horas de duração)..");
 		panel.add(limitTime);
 		panel.add(limitTimeInput);
 

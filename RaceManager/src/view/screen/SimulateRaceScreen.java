@@ -3,6 +3,7 @@ package view.screen;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -46,7 +47,7 @@ public class SimulateRaceScreen extends JFrame {
 
 		JLabel stopWatch = new JLabel("00:00:0000");
 		stopWatch.setFont(new Font("Arial", Font.BOLD, 32));
-		stopWatchPanel.add(stopWatch);
+		
 
 		JLabel enterId = new JLabel("Informe o id de quem terminou a corrida:");
 		JTextField idInput = new JTextField(10);
@@ -54,11 +55,18 @@ public class SimulateRaceScreen extends JFrame {
 		completeBttn.setPreferredSize(new Dimension(screenWidth, 50));
 		completeBttn.setEnabled(false);
 		stopWatchPanel.add(enterId);
+		stopWatchPanel.add(stopWatch);
 		stopWatchPanel.add(idInput);
 		stopWatchPanel.add(completeBttn);
+		
 
-		RunnersListPanel list = new RunnersListPanel("Resultado");
-
+		JPanel listsPanel = new JPanel();
+		listsPanel.setLayout(new FlowLayout());
+		RunnersListPanel listOfRunning = new RunnersListPanel("Resultado");
+		RunnersListPanel listOfFinished = new RunnersListPanel("Resultado");
+		listsPanel.add(listOfRunning, BorderLayout.WEST);
+		listsPanel.add(listOfFinished, BorderLayout.EAST);
+		
 		completeBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -66,7 +74,7 @@ public class SimulateRaceScreen extends JFrame {
 					
 					Runner runner = race.completeRace(passedId);
 
-					list.addRunner(runner.getId(), runner.getName(), runner.getBirthDate(), runner.getGender(),
+					listOfRunning.addRunner(runner.getId(), runner.getName(), runner.getBirthDate(), runner.getGender(),
 							runner.getPhone(), runner.getElapsedTime());
 
 				} catch (NumberFormatException e2) {
@@ -111,7 +119,7 @@ public class SimulateRaceScreen extends JFrame {
 		});
 
 		c.add(stopWatchPanel, BorderLayout.NORTH);
-		c.add(list, BorderLayout.CENTER);
+		c.add(listsPanel, BorderLayout.CENTER);
 		c.add(bttnPanel, BorderLayout.SOUTH);
 		this.setVisible(true);
 	}

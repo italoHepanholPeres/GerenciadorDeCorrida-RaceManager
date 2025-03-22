@@ -40,7 +40,7 @@ public class InitialMenuScreen extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		
-		wallpaper = tk.createImage("src/resource/wallpaper.png");
+		wallpaper = tk.createImage("src/resource/wallpaper.jpeg");
 		JPanel backPanel = new NewContentPanel();
 
 		Container c = this.getContentPane();
@@ -73,7 +73,7 @@ public class InitialMenuScreen extends JFrame{
 	private class NewContentPanel extends JPanel{
 		protected void paintComponent(final Graphics g) {
 			super.paintComponent(g);
-			g.drawImage(wallpaper, 0, 0, screenWidth,screenWidth,this);
+			g.drawImage(wallpaper, 0, 0, screenWidth,screenHeight-50,this);
 		}
 	}
 	

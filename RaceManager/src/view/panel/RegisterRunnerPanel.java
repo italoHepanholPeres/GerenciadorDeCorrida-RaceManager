@@ -2,12 +2,14 @@ package view.panel;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeParseException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,7 +24,6 @@ import view.screen.SimulateRaceScreen;
 
 public class RegisterRunnerPanel extends JPanel {
 	
-	private int screenHeight;
 	private int screenWidth;
 	
     private static final long serialVersionUID = 1L;
@@ -32,41 +33,51 @@ public class RegisterRunnerPanel extends JPanel {
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
         
-        screenHeight = d.height;
         screenWidth = d.width;
         
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(7, 2, 0, 0));
 
         JLabel name = new JLabel("Informe o nome do corredor:");
+        name.setFont(new Font("Arial", Font.BOLD, 18));
         JTextField nameInput = new JTextField(20);
+        nameInput.setFont(new Font("Arial", Font.BOLD, 18));
         inputPanel.add(name);
         inputPanel.add(nameInput);
 
         JLabel birthDate = new JLabel("Informe a data de nascimento do corredor:");
+        birthDate.setFont(new Font("Arial", Font.BOLD, 18));
         JTextField birthDateInput = new JTextField(20);
+        birthDateInput.setFont(new Font("Arial", Font.BOLD, 18));
         inputPanel.add(birthDate);
         inputPanel.add(birthDateInput);
 
         JLabel gender = new JLabel("Informe o genero do corredor:");
+        gender.setFont(new Font("Arial", Font.BOLD, 18));
         JTextField genderInput = new JTextField(20);
+        genderInput.setFont(new Font("Arial", Font.BOLD, 18));
         inputPanel.add(gender);
         inputPanel.add(genderInput);
 
         JLabel phone = new JLabel("Informe o telefone do corredor:");
+        phone.setFont(new Font("Arial", Font.BOLD, 18));
         JTextField phoneInput = new JTextField(20);
+        phoneInput.setFont(new Font("Arial", Font.BOLD, 18));
         inputPanel.add(phone);
         inputPanel.add(phoneInput);
 
         JButton addBttn = new JButton("Adicionar corredor");
+        addBttn.setFont(new Font("Arial", Font.BOLD, 18));
         addBttn.setPreferredSize(new Dimension(150, 30));
         inputPanel.add(addBttn);
 
         JLabel remove = new JLabel("Informe um id para remover o corredor");
+        remove.setFont(new Font("Arial", Font.BOLD, 18));
         JTextField idToRemove = new JTextField(10);
+        idToRemove.setFont(new Font("Arial", Font.BOLD, 18));
         JButton removeBttn = new JButton("Remover corredor");
+        removeBttn.setFont(new Font("Arial", Font.BOLD, 18));
         removeBttn.setPreferredSize(new Dimension(150, 30));
-        
 
         inputPanel.add(remove);
         inputPanel.add(removeBttn);
@@ -119,7 +130,7 @@ public class RegisterRunnerPanel extends JPanel {
 
                 try {
                     Runner runner = race.addRunner(name, birthDate, gender, phone);
-                    outputPanel.addRunner(runner.getId(), name, birthDate, gender, phone);
+                    outputPanel.addRunner(runner);
                     outputPanel.revalidate();
                     outputPanel.repaint();
                     RegisterRunnerPanel.this.revalidate();
@@ -170,6 +181,7 @@ public class RegisterRunnerPanel extends JPanel {
 
         JButton confirmBttn = new JButton("Confirmar Corrida");
         confirmBttn.setPreferredSize(new Dimension(screenWidth,50));
+        confirmBttn.setFont(new Font("Arial", Font.BOLD, 18));
         outputPanel.add(confirmBttn, BorderLayout.SOUTH);
         
         confirmBttn.addActionListener(new ActionListener() {

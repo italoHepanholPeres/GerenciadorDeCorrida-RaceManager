@@ -12,6 +12,7 @@ public class Runner {
 	private String gender;
 	private String phone;
 	private long finishedTime;
+	private String classification;
 
 	private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd/MM/uuuu")
 			.withResolverStyle(ResolverStyle.STRICT);
@@ -74,8 +75,22 @@ public class Runner {
 		return finishedTime;
 	}
 
-	public void finishRace(long tempoAtual) {
+	public void finishRace(long tempoAtual, int obtainedClassification) {
 		this.finishedTime = tempoAtual;
+		this.classification = String.valueOf(obtainedClassification);
+	}
+	
+	public void finishRace(long tempoAtual, String obtainedClassification) {
+		this.finishedTime = tempoAtual;
+		this.classification = obtainedClassification;
+	}
+	
+	public String getClassification() {
+		return classification;
+	}
+
+	public void setClassification(String classification) {
+		this.classification = classification;
 	}
 
 	public String getElapsedTime() {

@@ -3,6 +3,7 @@ package view.screen;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -36,9 +37,11 @@ public class InitialMenuScreen extends JFrame{
 		Dimension d = tk.getScreenSize();
 		screenHeight = d.height;
 		screenWidth = d.width;
-		this.setSize(screenWidth, screenHeight);
+		this.setSize(screenWidth, screenHeight-45);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
+		ImageIcon icon = new ImageIcon("src/resource/icon.png");
+		this.setIconImage(icon.getImage());
 		
 		wallpaper = tk.createImage("src/resource/wallpaper.jpeg");
 		JPanel backPanel = new NewContentPanel();
@@ -51,10 +54,11 @@ public class InitialMenuScreen extends JFrame{
 		this.setJMenuBar(menuBar);
 		
 		JMenu register = new JMenu("Criação");
+		register.setFont(new Font("Arial", Font.BOLD, 18));
 		
 		menuBar.add(register);
 		
-		ImageIcon originalIcon1 = new ImageIcon("src/resource/createRace.jpg");
+		ImageIcon originalIcon1 = new ImageIcon("src/resource/plus.jpg");
 		Image imageIcon1 = originalIcon1.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		
 		

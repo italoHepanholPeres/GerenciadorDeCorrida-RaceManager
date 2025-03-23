@@ -14,19 +14,20 @@ public class Race {
 	private Map<Integer, Runner> runnersRunning = new HashMap<>();
 	private Map<Integer, Runner> runnersFinished = new HashMap<>();
 	private int nextId = 1;
+	private int nextClassification = 1;
 
 	private String name;
 	private String city;
-	private String startLocal;
+	private String StartAndFinishLocal;
 	private String distance;
 	private LocalDateTime date;
 	private static long startTime;
 	private static long limitRaceTime;
 
-	public Race(String name, String city, String startLocal, String distance, String date, long limitRaceTime) {
+	public Race(String name, String city, String StartAndFinishLocal, String distance, String date, long limitRaceTime) {
 		this.name = name;
 		this.city = city;
-		this.startLocal = startLocal;
+		this.StartAndFinishLocal = StartAndFinishLocal;
 		this.distance = distance;
 		this.date = LocalDateTime.parse(date, FORMAT);
 		Race.limitRaceTime = limitRaceTime;
@@ -52,12 +53,12 @@ public class Race {
 		this.city = city;
 	}
 
-	public String getStartLocal() {
-		return startLocal;
+	public String getStartAndFinishLocal() {
+		return StartAndFinishLocal;
 	}
 
-	public void setStartLocal(String startLocal) {
-		this.startLocal = startLocal;
+	public void setStartAndFinishLocal(String StartAndFinishLocal) {
+		this.StartAndFinishLocal = StartAndFinishLocal;
 	}
 
 	public String getDistance() {
@@ -80,9 +81,13 @@ public class Race {
 		//long limitRaceTime = (hours * 60 * 60 * 1000) + (minutes * 60 * 1000);
 		long hours = limitRaceTime / (60 * 60 * 1000);
         long remainingMinutesInMillis = limitRaceTime % (60 * 60 * 1000);
-        long minutes = remainingMinutesInMillis / (60 * 1000); //
+        long minutes = remainingMinutesInMillis / (60 * 1000);
 		
 		return String.format("%02d:%02d", hours, minutes);
+	}
+	
+	public static long getLimitRaceTime() {
+		return limitRaceTime;
 	}
 
 	public void setLimitRaceTime(long limitRaceTime) {
@@ -104,7 +109,7 @@ public class Race {
 		runnersRunning.remove(id);
 	}
 
-	public List<Runner> listRunners() {
+	public List<Runner> listRunnersrunning() {
 		return new ArrayList<Runner>(runnersRunning.values());
 	}
 
@@ -120,14 +125,10 @@ public class Race {
 		startTime = System.currentTimeMillis();
 	}
 
-	public void finishRace() {
-
-	}
-
-	public Runner completeRace(int id) {
-		long tempoAtual = System.currentTimeMillis();
+	public Runner completeRace(int id, long actualTime) {
 		Runner runner = runnersRunning.get(id);
-		runner.finishRace(tempoAtual);
+		runner.finishRace(actualTime, nextClassification);
+		nextClassification++;
 
 		runnersFinished.put(runner.getId(), runner);
 		runnersRunning.remove(runner.getId());
@@ -137,7 +138,7 @@ public class Race {
 	@Override
 	public String toString() {
 		return "Corrida [corredoresCorrendo=" + runnersRunning + ", corredoresFinalizados=" + runnersFinished
-				+ ", proximoId=" + nextId + ", nome=" + name + ", cidade=" + city + ", Local de início=" + startLocal
+				+ ", proximoId=" + nextId + ", nome=" + name + ", cidade=" + city + ", Local de início=" + StartAndFinishLocal
 				+ ", percurso=" + distance + ", data=" + date + "]";
 	}
 

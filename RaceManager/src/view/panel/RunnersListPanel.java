@@ -39,10 +39,10 @@ public class RunnersListPanel extends JPanel{
 	        add(scrollPane, BorderLayout.CENTER);
 	    }
 	    
-	    public RunnersListPanel(String field) {
+	    public RunnersListPanel(String field1, String field2) {
 	        setLayout(new BorderLayout());
 	        
-	        model = new DefaultTableModel(new Object[] { "ID", "Nome", "Data de Nascimento", "Gênero", "Telefone", field }, 0) {
+	        model = new DefaultTableModel(new Object[] { "ID", "Nome", "Data de Nascimento", "Gênero", "Telefone", field1, field2 }, 0) {
 	            private static final long serialVersionUID = 1L;
 	            //não deixa editar os campos
 	            @Override
@@ -78,17 +78,17 @@ public class RunnersListPanel extends JPanel{
 	        JScrollPane scrollPane = new JScrollPane(table);
 	        add(scrollPane, BorderLayout.CENTER);
 	        
-	        for(Runner runner : race.listRunners()) {
+	        for(Runner runner : race.listRunnersrunning()) {
 	        	model.addRow(new Object[] { runner.getId(), runner.getName(), runner.getBirthDate(), runner.getGender(), runner.getPhone()});
 	        }
 	    }
 
-	    public void addRunner(int id, String name, String birthDate, String gender, String phone) {
-	        model.addRow(new Object[]{ id, name, birthDate, gender, phone });
+	    public void addRunner(Runner runner) {
+	        model.addRow(new Object[]{ runner.getId(), runner.getName(), runner.getBirthDate(), runner.getGender(), runner.getPhone() });
 	    }
 	    
-	    public void addRunner(int id, String name, String birthDate, String gender, String phone, String field) {
-	        model.addRow(new Object[]{ id, name, birthDate, gender, phone, field});
+	    public void addRunnerFinished(Runner runner) {
+	        model.addRow(new Object[]{ runner.getId(), runner.getName(), runner.getBirthDate(), runner.getGender(), runner.getPhone(), runner.getElapsedTime(), runner.getClassification()});
 	    }
 
 	    public void removeRunner(int id) {

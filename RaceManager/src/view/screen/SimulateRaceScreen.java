@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,15 +23,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.border.TitledBorder;
 
 import model.Race;
 import model.Runner;
+import view.panel.RegisterRunnerPanel;
 import view.panel.RunnersListPanel;
 
 public class SimulateRaceScreen extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-//	private Timer timer;
 	private int screenHeight;
 	private int screenWidth;
 	private long actualTime;
@@ -51,12 +53,20 @@ public class SimulateRaceScreen extends JFrame {
 
 		Container c = this.getContentPane();
 		c.setLayout(new BorderLayout());
-
-		JPanel stopWatchPanel = new JPanel();
-		stopWatchPanel.setLayout(new GridLayout(2, 2, 2, 2));
+		
+		JPanel northPanel = new JPanel();
+		northPanel.setLayout(new BorderLayout());
+		
+		TitledBorder northBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Completar corrida",
+				TitledBorder.LEFT, TitledBorder.TOP);
+		northBorder.setTitleFont(new Font("Arial", Font.BOLD, 22));
+		
+		northPanel.setBorder(northBorder);
+		JPanel completePanel = new JPanel();
+		completePanel.setLayout(new GridLayout(1, 2, 2, 2));
 
 		JLabel stopWatch = new JLabel("00:00:0000");
-		stopWatch.setFont(new Font("Arial", Font.BOLD, 32));
+		stopWatch.setFont(new Font("Arial", Font.BOLD, 44));
 
 		JLabel enterId = new JLabel("Informe o id de quem terminou a corrida:");
 		enterId.setFont(new Font("Arial", Font.BOLD, 18));
@@ -65,11 +75,26 @@ public class SimulateRaceScreen extends JFrame {
 		completeBttn.setFont(new Font("Arial", Font.BOLD, 18));
 		completeBttn.setPreferredSize(new Dimension(screenWidth, 50));
 		completeBttn.setEnabled(false);
-		stopWatchPanel.add(enterId);
-		stopWatchPanel.add(stopWatch);
-		stopWatchPanel.add(idInput);
-		stopWatchPanel.add(completeBttn);
-
+		
+		completePanel.add(enterId);
+		completePanel.add(idInput);
+		completePanel.setPreferredSize(new Dimension(screenWidth, 50));
+		
+		JPanel completeBttnPanel = new JPanel();
+		completeBttnPanel.add(completeBttn);
+		
+		northPanel.add(completePanel, BorderLayout.NORTH);
+		northPanel.add(completeBttnPanel, BorderLayout.CENTER);
+	
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new BorderLayout());
+		
+		TitledBorder centerBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Cronômetro e listas",
+				TitledBorder.LEFT, TitledBorder.TOP);
+		centerBorder.setTitleFont(new Font("Arial", Font.BOLD, 22));
+		
+		centerPanel.setBorder(centerBorder);
+		
 		JPanel listsPanel = new JPanel();
 		listsPanel.setPreferredSize(new Dimension(1000,1000));
 		listsPanel.setLayout(new FlowLayout());
@@ -84,7 +109,17 @@ public class SimulateRaceScreen extends JFrame {
 		RunnersListPanel listOfFinished = new RunnersListPanel("Resultado", "Classificação");
 		listOfFinished.setPreferredSize(new Dimension(700,450));
 		listsPanel.add(listOfFinished, BorderLayout.EAST);
-
+		
+		JPanel stopWatchPanel = new JPanel();
+		stopWatchPanel.add(stopWatch);
+		
+		centerPanel.add(listsPanel, BorderLayout.CENTER);
+		centerPanel.add(stopWatchPanel, BorderLayout.NORTH);
+		
+		JButton backBttn = new JButton("Voltar a tela principal");
+		backBttn.setFont(new Font("Arial", Font.BOLD, 18));
+		backBttn.setPreferredSize(new Dimension(screenWidth, 50));
+		
 		completeBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -105,7 +140,7 @@ public class SimulateRaceScreen extends JFrame {
 				
 				if(race.listRunnersrunning().isEmpty()) {
 					scheduler.shutdown();
-//					timer.stop();
+					backBttn.setEnabled(true);
 				}
 				
 			}
@@ -117,7 +152,9 @@ public class SimulateRaceScreen extends JFrame {
 		JButton startRaceBttn = new JButton("Começar Corrida");
 		startRaceBttn.setFont(new Font("Arial", Font.BOLD, 18));
 		startRaceBttn.setPreferredSize(new Dimension(screenWidth, 50));
+		
 		bttnPanel.add(startRaceBttn);
+		bttnPanel.add(backBttn);
 
 		startRaceBttn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,47 +173,37 @@ public class SimulateRaceScreen extends JFrame {
 					
 					if(elapsedTime >= limitTime) {
 						scheduler.shutdown();
+						backBttn.setEnabled(true);
+						
 						long finishTime = System.currentTimeMillis();
 						
 						for(Runner runner : race.listRunnersrunning()) {
 							
 							runner.finishRace(finishTime, "Desqualificado");
 							
-//							runner.setClassification("Desqualificado");
 							listOfFinished.addRunnerFinished(runner);
 						}
 						
-//						timer.stop();
 					}
 
-//					stopWatch.setText(String.format("%02d:%02d:%03d", minutes, seconds, miliSeconds));
 				}, 0, 10, TimeUnit.MILLISECONDS);
 				
-//				timer = new Timer(10, new ActionListener() {
-//					@Override
-//					public void actionPerformed(ActionEvent e) {
-//						long elapsedTime = System.currentTimeMillis() - Race.getStartTime();
-//						actualTime = System.currentTimeMillis();
-//						int minutes = (int) (elapsedTime / 60000) % 60;
-//						int seconds = (int) ((elapsedTime % 60000) / 1000);
-//						int miliSeconds = (int) (elapsedTime % 1000);
-//						
-//						if(elapsedTime >= Race.getLimitRaceTime()) {
-//							timer.stop();
-//						}
-//
-//						stopWatch.setText(String.format("%02d:%02d:%03d", minutes, seconds, miliSeconds));
-//					}
-//				});
-
-//				timer.start();
 				completeBttn.setEnabled(true);
 				startRaceBttn.setEnabled(false);
+				backBttn.setEnabled(false);
 			}
 		});
+		
+		backBttn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new InitialMenuScreen(race);
+			}
+		});
+		
 
-		c.add(stopWatchPanel, BorderLayout.NORTH);
-		c.add(listsPanel, BorderLayout.CENTER);
+		c.add(northPanel, BorderLayout.NORTH);
+		c.add(centerPanel, BorderLayout.CENTER);
 		c.add(bttnPanel, BorderLayout.SOUTH);
 		this.setVisible(true);
 	}

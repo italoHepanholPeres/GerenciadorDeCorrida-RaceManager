@@ -24,6 +24,9 @@ import view.panel.RegisterRunnerPanel;
 
 public class ConfirmScreen extends JFrame {
 
+	
+	private static final long serialVersionUID = 1L;
+	
 	private int screenHeight;
 	private int screenWidth;
 
@@ -39,7 +42,6 @@ public class ConfirmScreen extends JFrame {
 		
 		ImageIcon icon = new ImageIcon("src/resource/icon.png");
 		this.setIconImage(icon.getImage());
-		
 
 		Container c = this.getContentPane();
 		c.setLayout(new BorderLayout());
@@ -100,6 +102,7 @@ public class ConfirmScreen extends JFrame {
 		racePanel.add(timeLimitOutput);
 
 		RegisterRunnerPanel runnerPanel = new RegisterRunnerPanel(race);
+		
 		TitledBorder registerRunnerBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Registrar Corredores",
 				TitledBorder.LEFT, TitledBorder.TOP);
 		

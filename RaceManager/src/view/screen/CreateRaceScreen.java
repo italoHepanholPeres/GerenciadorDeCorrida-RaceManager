@@ -109,11 +109,11 @@ public class CreateRaceScreen extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//testes
-				nameInput.setText("corrida tal");
-				cityInput.setText("sao fidelis");
-//				startFinisheLocalInput.setText("");
-				distanceInput.setText("12KM");
-				dateInput.setText("19/05/2025 13:00");
+//				nameInput.setText("corrida tal");
+//				cityInput.setText("sao fidelis");
+////				startFinisheLocalInput.setText("");
+//				distanceInput.setText("12KM");
+//				dateInput.setText("19/05/2025 13:00");
 				
 				String name = nameInput.getText().trim();
 				String city = cityInput.getText().trim();

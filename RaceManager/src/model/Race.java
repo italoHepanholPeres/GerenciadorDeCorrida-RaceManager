@@ -116,6 +116,17 @@ public class Race {
 	public Runner getRunnerFinishedById(int id) {
 		return runnersFinished.get(id);
 	}
+	
+	public Object getRunnerFinishedByClassification(int classification) {
+		
+		for(Runner runner : runnersFinished.values()) {
+			
+			if(runner.getClassification().equals(String.valueOf(classification))) {
+				return runner;
+			}	
+		}
+		return "Não houve corredor classificado como " + classification + "!";
+	}
 
 	public static long getStartTime() {
 		return startTime;
